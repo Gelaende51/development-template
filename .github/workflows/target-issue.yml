@@ -5,7 +5,7 @@
 #   report:
 #     needs: [every, target, job]
 #     if: always() && inputs.why != ''
-#     uses: Gelaende51/development-template/.github/workflows/target-issue.yml@v1
+#     uses: Gelaende51/development-template/.github/workflows/target-issue.yml@v1.0.1
 #     permissions:
 #       issues: write
 #     with:

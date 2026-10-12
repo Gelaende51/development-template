@@ -12,11 +12,20 @@ made from it depend on:
 Tooling comes from Lure (an Obsidian plugin) and is moved here layer by layer; the
 design and the phases are in `obsidian-plugin-template/docs/superpowers/specs/2026-10-12-shared-toolkit-design.md`.
 
-Status: scaffold (phase 1). Licence: AGPL-3.0 (see `LICENSE`).
+Status: 1.0.1 (phase 2 of 8). Packages by exact tag: `npm i github:Gelaende51/development-template#v1.0.1`; workflows `@v1.0.1`. Licence: AGPL-3.0 (see `LICENSE`).
 
 ## In here so far
 
 - `lib/harness.mjs` — the test harness: `createSuite({ reset, teardown, skip, outside })`,
   `skipCase(why)`, `expect`, `--first=N` bisection, failure screenshots. `outside` names
   the cases that need data outside the app's own folder, left out where a sandbox
-  cannot see there (`LURE_EXPECT_SANDBOX`, to be renamed).
+  cannot see there (`EXPECT_SANDBOX`); `SHOTS=<dir>` saves a screenshot at a case's
+  first failure (`globalThis.__harnessSession` is the CDP session). The `LURE_` names
+  still work.
+- `lib/fs-errors.mjs` — failed file operations in words: `errorText(err, { t, shortPath })`
+  maps Node's codes (and `ENOTRASH`, `ENOTSUP`) to sentences with the path, adds a
+  Flatpak/Snap sandbox hint, English built in; `withCode(err, code, path)` for libraries
+  that lose the reason.
+- `.github/workflows/target-issue.yml` — reusable: one issue per failing test target,
+  commented on repeat failures, closed when the target passes again.
+- `schema/devkit.config.schema.json` — the per-project config every layer reads.

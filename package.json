@@ -1,6 +1,6 @@
 {
 	"name": "development-template",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "The core layer: test harness, CI orchestration, watches, canaries, i18n and disclosure tooling for any software project. electron-template and obsidian-plugin-template build on it.",
 	"type": "module",
 	"exports": {
