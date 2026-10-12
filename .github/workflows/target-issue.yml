@@ -1,0 +1,49 @@
+# One issue per failing test target, kept open: a later failure comments on
+# it, and the target passing again closes it. Called as the last job of a
+# workflow of named targets, only for runs started by automation (`why`):
+#
+#   report:
+#     needs: [every, target, job]
+#     if: always() && inputs.why != ''
+#     uses: Gelaende51/development-template/.github/workflows/target-issue.yml@v1
+#     permissions:
+#       issues: write
+#     with:
+#       target: ${{ inputs.target }}
+#       why: ${{ inputs.why }}
+#       failed: ${{ contains(needs.*.result, 'failure') }}
+#       cancelled: ${{ contains(needs.*.result, 'cancelled') }}
+name: Target issue
+on:
+  workflow_call:
+    inputs:
+      target: { type: string, required: true }
+      why: { type: string, required: true }
+      failed: { type: boolean, required: true }
+      cancelled: { type: boolean, default: false }
+
+jobs:
+  issue:
+    # A cancelled run says nothing either way.
+    if: inputs.failed || !inputs.cancelled
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          WHY: ${{ inputs.why }}
+          TARGET: ${{ inputs.target }}
+          FAILED: ${{ inputs.failed }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Tests fail on $TARGET"
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number,title -q ".[] | select(.title == \"$title\") | .number")
+          if [ "$FAILED" = true ]; then
+            body="$(printf '%s\n\nRun: %s' "$WHY" "$RUN")"
+            first=$(echo "$open" | head -1)
+            if [ -n "$first" ]; then gh issue comment "$first" --repo "$GITHUB_REPOSITORY" --body "$body"
+            else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"; fi
+          else
+            for n in $open; do gh issue close "$n" --repo "$GITHUB_REPOSITORY" --comment "Passing again: $RUN"; done
+          fi

@@ -1,0 +1,34 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/Gelaende51/development-template/schema/devkit.config.schema.json",
+	"title": "devkit.config.json",
+	"description": "The facts about one project that the toolkit's scripts and workflows read. Nothing project-specific lives in the toolkit itself. Each layer adds its own section.",
+	"type": "object",
+	"required": ["id", "name"],
+	"properties": {
+		"$schema": { "type": "string" },
+		"id": { "type": "string", "description": "Machine name: package, plugin or app id." },
+		"name": { "type": "string", "description": "Display name." },
+		"repository": { "type": "string", "pattern": "^[^/]+/[^/]+$", "description": "owner/name on GitHub." },
+		"locales": { "type": "array", "items": { "type": "string" }, "description": "BCP 47 codes of the translations, English first." },
+		"suites": { "type": "array", "items": { "type": "string" }, "description": "Test suites, run in this order." },
+		"targets": { "type": "array", "items": { "type": "string" }, "description": "System targets enabled for this project (the electron layer lists them)." },
+		"disclosure": {
+			"type": "object",
+			"description": "AI-usage disclosure in the README.",
+			"properties": {
+				"models": { "type": "array", "items": { "type": "string" } },
+				"provider": { "type": "string" }
+			}
+		},
+		"donation": {
+			"type": "object",
+			"properties": {
+				"url": { "type": "string" },
+				"designation": { "enum": ["carbon offset", "server cost", "support dependencies", "free software", "subscriptions", "legal cost", "hardware"] }
+			}
+		},
+		"electron": { "type": "object", "description": "Read by electron-template." },
+		"obsidian": { "type": "object", "description": "Read by obsidian-plugin-template." }
+	}
+}
