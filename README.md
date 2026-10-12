@@ -12,8 +12,7 @@ made from it depend on:
 Tooling comes from Lure (an Obsidian plugin) and is moved here layer by layer; the
 design and the phases are in `obsidian-plugin-template/docs/superpowers/specs/2026-10-12-shared-toolkit-design.md`.
 
-Status: scaffold (phase 1). Licence and GitHub account still to be decided — until then
-this repository is local only.
+Status: scaffold (phase 1). Licence: AGPL-3.0 (see `LICENSE`).
 
 ## In here so far
 
