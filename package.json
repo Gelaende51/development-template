@@ -1,6 +1,6 @@
 {
 	"name": "development-template",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "The core layer: test harness, CI orchestration, watches, canaries, i18n and disclosure tooling for any software project. electron-template and obsidian-plugin-template build on it.",
 	"type": "module",
 	"exports": {
@@ -9,10 +9,14 @@
 		"./schema": "./schema/devkit.config.schema.json"
 	},
 	"files": [
+		"bin",
 		"lib",
 		"schema",
 		"docs",
 		".github/workflows"
 	],
-	"license": "AGPL-3.0-only"
+	"license": "AGPL-3.0-only",
+	"bin": {
+		"environment-watch": "bin/environment-watch.mjs"
+	}
 }

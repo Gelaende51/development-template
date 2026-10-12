@@ -12,7 +12,7 @@ made from it depend on:
 Tooling comes from Lure (an Obsidian plugin) and is moved here layer by layer; the
 design and the phases are in `obsidian-plugin-template/docs/superpowers/specs/2026-10-12-shared-toolkit-design.md`.
 
-Status: 1.0.1 (phase 2 of 8). Packages by exact tag (`…/tar.gz/refs/tags/v1.0.1`; npm 12 needs `allow-remote=root` in `.npmrc`); workflows by `@v1`, which moves to each 1.x release. Licence: AGPL-3.0 (see `LICENSE`).
+Status: 1.1.0 (phase 4 of 8). Packages by exact tag (`…/tar.gz/refs/tags/v1.1.0`; npm 12 needs `allow-remote=root` in `.npmrc`); workflows by `@v1`, which moves to each 1.x release. Licence: AGPL-3.0 (see `LICENSE`).
 
 ## In here so far
 
@@ -28,4 +28,10 @@ Status: 1.0.1 (phase 2 of 8). Packages by exact tag (`…/tar.gz/refs/tags/v1.0.
   that lose the reason.
 - `.github/workflows/target-issue.yml` — reusable: one issue per failing test target,
   commented on repeat failures, closed when the target passes again.
+- `bin/environment-watch.mjs` (`environment-watch [--diff]`) — what each test environment
+  is made of today (Docker Hub digests, Repology, Flathub, Snapcraft, WineHQ, npm dist-tags,
+  GitHub runner images), from the project's `environments` config; `--diff` against the
+  state file says which targets to run. Unreadable sources keep their last value.
+- `docs/portability-and-ci.md` — the guide: data anywhere, paths, probing the system,
+  errors in words, which test environments find what, CI organisation, watching changes.
 - `schema/devkit.config.schema.json` — the per-project config every layer reads.

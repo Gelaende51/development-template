@@ -4,31 +4,149 @@
 	"title": "devkit.config.json",
 	"description": "The facts about one project that the toolkit's scripts and workflows read. Nothing project-specific lives in the toolkit itself. Each layer adds its own section.",
 	"type": "object",
-	"required": ["id", "name"],
+	"required": [
+		"id",
+		"name"
+	],
 	"properties": {
-		"$schema": { "type": "string" },
-		"id": { "type": "string", "description": "Machine name: package, plugin or app id." },
-		"name": { "type": "string", "description": "Display name." },
-		"repository": { "type": "string", "pattern": "^[^/]+/[^/]+$", "description": "owner/name on GitHub." },
-		"locales": { "type": "array", "items": { "type": "string" }, "description": "BCP 47 codes of the translations, English first." },
-		"suites": { "type": "array", "items": { "type": "string" }, "description": "Test suites, run in this order." },
-		"targets": { "type": "array", "items": { "type": "string" }, "description": "System targets enabled for this project (the electron layer lists them)." },
+		"$schema": {
+			"type": "string"
+		},
+		"id": {
+			"type": "string",
+			"description": "Machine name: package, plugin or app id."
+		},
+		"name": {
+			"type": "string",
+			"description": "Display name."
+		},
+		"repository": {
+			"type": "string",
+			"pattern": "^[^/]+/[^/]+$",
+			"description": "owner/name on GitHub."
+		},
+		"locales": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "BCP 47 codes of the translations, English first."
+		},
+		"suites": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "Test suites, run in this order."
+		},
+		"targets": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "System targets enabled for this project (the electron layer lists them)."
+		},
 		"disclosure": {
 			"type": "object",
 			"description": "AI-usage disclosure in the README.",
 			"properties": {
-				"models": { "type": "array", "items": { "type": "string" } },
-				"provider": { "type": "string" }
+				"models": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"provider": {
+					"type": "string"
+				}
 			}
 		},
 		"donation": {
 			"type": "object",
 			"properties": {
-				"url": { "type": "string" },
-				"designation": { "enum": ["carbon offset", "server cost", "support dependencies", "free software", "subscriptions", "legal cost", "hardware"] }
+				"url": {
+					"type": "string"
+				},
+				"designation": {
+					"enum": [
+						"carbon offset",
+						"server cost",
+						"support dependencies",
+						"free software",
+						"subscriptions",
+						"legal cost",
+						"hardware"
+					]
+				}
 			}
 		},
-		"electron": { "type": "object", "description": "Read by electron-template." },
-		"obsidian": { "type": "object", "description": "Read by obsidian-plugin-template." }
+		"electron": {
+			"type": "object",
+			"description": "Read by electron-template."
+		},
+		"obsidian": {
+			"type": "object",
+			"description": "Read by obsidian-plugin-template."
+		},
+		"environments": {
+			"type": "object",
+			"description": "Test environments read by environment-watch: name → where its version is published and which targets to run when it changes (\"main\" = the main test workflow).",
+			"additionalProperties": {
+				"type": "object",
+				"required": [
+					"source",
+					"targets"
+				],
+				"properties": {
+					"source": {
+						"enum": [
+							"docker",
+							"repology",
+							"flathub",
+							"snap",
+							"winehq",
+							"npm",
+							"runner"
+						]
+					},
+					"targets": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"repo": {
+						"type": "string"
+					},
+					"tag": {
+						"type": "string"
+					},
+					"project": {
+						"type": "string"
+					},
+					"app": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"package": {
+						"type": "string"
+					},
+					"dist": {
+						"type": "string"
+					},
+					"image": {
+						"type": "string"
+					},
+					"channel": {
+						"type": "string"
+					},
+					"architecture": {
+						"type": "string"
+					}
+				}
+			}
+		}
 	}
 }
