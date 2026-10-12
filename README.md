@@ -12,7 +12,7 @@ made from it depend on:
 Tooling comes from Lure (an Obsidian plugin) and is moved here layer by layer; the
 design and the phases are in `obsidian-plugin-template/docs/superpowers/specs/2026-10-12-shared-toolkit-design.md`.
 
-Status: 1.0.1 (phase 2 of 8). Packages by exact tag: `npm i github:Gelaende51/development-template#v1.0.1`; workflows `@v1.0.1`. Licence: AGPL-3.0 (see `LICENSE`).
+Status: 1.0.1 (phase 2 of 8). Packages by exact tag (`…/tar.gz/refs/tags/v1.0.1`; npm 12 needs `allow-remote=root` in `.npmrc`); workflows by `@v1`, which moves to each 1.x release. Licence: AGPL-3.0 (see `LICENSE`).
 
 ## In here so far
 
